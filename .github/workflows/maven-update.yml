@@ -1,38 +1,42 @@
-name: Auto Update Maven Dependencies
+name: Generate Maven pom.xml and Update Dependencies
 
 on:
   schedule:
-    # This cron syntax runs the workflow every 6 hours
-    - cron: '0 */6 * * *'  # Runs every 6 hours on the hour
-  workflow_dispatch:  # Allows manual trigger via GitHub UI
+    # Runs every 6 hours
+    - cron: '0 */6 * * *'
+  workflow_dispatch:  # Allows manual trigger
 
 jobs:
-  update-dependencies:
+  generate-pom:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout the repository code
+      # Checkout repository
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      # Set up Java (Maven) environment
+      # Set up Java (Maven)
       - name: Set up JDK 11
         uses: actions/setup-java@v2
         with:
           java-version: '11'
           distribution: 'temurin'
 
-      # Update Maven dependencies (adjust according to your needs)
-      - name: Update Maven dependencies
-        run: mvn versions:use-latest-releases -DallowSnapshots=false
+      # Generate a new Maven project (pom.xml)
+      - name: Generate Maven Project (pom.xml)
+        run: mvn archetype:generate -DgroupId=com.example -DartifactId=my-project -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
 
-      # Commit and push changes to pom.xml
-      - name: Commit and push changes
+      # Run Maven goal to update dependencies
+      - name: Update Maven dependencies
+        run: mvn versions:use-latest-releases
+
+      # Commit and push changes
+      - name: Commit and push pom.xml
         run: |
-          git config --global user.name "github-actions"
-          git config --global user.email "github-actions@github.com"
+          git config --global user.name "dependency-update"
+          git config --global user.email "dependency-update@example.com"
           git add pom.xml
-          git commit -m "Auto update Maven dependencies"
+          git commit -m "Generate pom.xml and update dependencies"
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
