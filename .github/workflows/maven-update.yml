@@ -1,4 +1,4 @@
-name: Auto Maven Dependencies
+name: Auto Update Maven Dependencies
 
 on:
   schedule:
@@ -20,7 +20,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: '11'
-          distribution: 'adoptopenjdk'
+          distribution: 'openjdk'
 
       # Update Maven dependencies (adjust according to your needs)
       - name: Update Maven dependencies
