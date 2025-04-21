@@ -13,7 +13,7 @@ jobs:
     steps:
       # Checkout repository
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       # Set up Java (Maven)
       - name: Set up JDK 11
