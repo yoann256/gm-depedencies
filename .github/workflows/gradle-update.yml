@@ -24,7 +24,7 @@ jobs:
 
       # Install Gradle wrapper validation
       - name: Set up Gradle
-        uses: gradle/wrapper-validation-action@v1
+        uses: gradle/wrapper-validation-action@v3
 
       # Run Gradle dependency updates task
       - name: Update Gradle dependencies
