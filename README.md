@@ -7,4 +7,4 @@ GM Dependencies, a open-contribution repository with many dependencies for Maven
 ## Contributing
 To contribute, please upload your .jar with this name format: ``com.package.name:v1.0``\
 For the licensing, please upload a LICENSE file named like this: ``LICENSE-your-jar-filename``\
-It is **recommended** to upload your source code in the [src folder](src/).
+Please upload your source code in the [src folder](src/).
